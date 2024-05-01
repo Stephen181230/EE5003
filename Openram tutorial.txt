@@ -1,0 +1,36 @@
+-----------------------------
+/apps/containers/scripts/openeda/loadOpenEdaEnv.sh  -shell
+-----------------------------
+.  /etc/profile
+----------------------------
+module  load  sqlite3  openram/1.2.41  openpdks/volare
+----------------------------
+export  PDK_ROOT=/usr/local/openeda/openpdks
+-----------------------------
+export CONDA_HOME=/usr/local/openeda/openram/1.2.41
+----------------------------------------
+Create a directory that you want to run OpenRAM in. Create a file named myconfig.py.
+--------------------------------------------------------------
+word_size = 2
+
+num_words = 16
+
+tech_name = “sky130”
+
+process_corners = [ “TT” ]
+
+supply_voltages = [ 1.8 ]
+
+temperatures = [ 25 ]
+
+num_spare_rows = 1
+
+num_spare_cols = 1
+
+output_path = “output”
+
+output_name = "sram_{0}_{1}_{2}".format(word_size,num_words,tech_name)
+-----------------------------------------------------------
+
+python3  ${OPENRAM_HOME}/../sram_compiler.py  myconfig
+
